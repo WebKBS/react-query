@@ -13,7 +13,7 @@ export default function FindEventSection() {
   // 변경되는 queryKey가 있다면 {}를 사용하여 쿼리를 식별하는 문자열을 전달한다.
   const { data, isPending, isError, error } = useQuery({
     queryKey: ['events', { search: searchTerm }],
-    queryFn: () => fetchEvents(searchElement.current.value),
+    queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }),
   });
 
   function handleSubmit(event) {
