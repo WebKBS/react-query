@@ -13,8 +13,8 @@ export default function NewEventsSection() {
   // gcTime은 쿼리가 만료된 후에 캐시에서 제거된다. 기본값은 5분, 단위는 밀리초
 
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ['events'],
-    queryFn: fetchEvents,
+    queryKey: ['events', { max: 3 }],
+    queryFn: ({ signal, queryKey }) => fetchEvents({ signal, ...queryKey[1] }),
     // staleTime: 5000,
     // gcTime: 1000,
   });

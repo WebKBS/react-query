@@ -12,8 +12,8 @@ export default function FindEventSection() {
   // 이 컴포넌트의 events의 키는 NewEventsSection의 queryKey와 독립적으로 사용된다.
   // 변경되는 queryKey가 있다면 {}를 사용하여 쿼리를 식별하는 문자열을 전달한다.
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ['events', { search: searchTerm }],
-    queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }),
+    queryKey: ['events', { searchTerm: searchTerm }],
+    queryFn: ({ signal, queryKey }) => fetchEvents({ signal, ...queryKey[1] }),
     enabled: searchTerm !== undefined,
   });
 
